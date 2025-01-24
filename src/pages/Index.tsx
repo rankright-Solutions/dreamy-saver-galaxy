@@ -5,6 +5,7 @@ import MatrixScreensaver from "@/components/screensavers/MatrixScreensaver";
 import StarfieldScreensaver from "@/components/screensavers/StarfieldScreensaver";
 import DvdScreensaver from "@/components/screensavers/DvdScreensaver";
 import Controls from "@/components/Controls";
+import { useToast } from "@/components/ui/use-toast";
 
 const Index = () => {
   const [searchParams] = useSearchParams();
@@ -12,11 +13,19 @@ const Index = () => {
   const [color, setColor] = useState("#ffffff");
   const [speed, setSpeed] = useState(5);
   const [size, setSize] = useState(50);
+  const { toast } = useToast();
 
   useEffect(() => {
     const screensaver = searchParams.get("screensaver");
     if (screensaver) {
       setCurrentScreensaver(screensaver);
+      if (!["bubbles", "matrix", "starfield", "dvd"].includes(screensaver)) {
+        toast({
+          title: "Coming Soon",
+          description: `The ${screensaver} screensaver is under development and will be available soon!`,
+          variant: "default",
+        });
+      }
     }
   }, [searchParams]);
 
@@ -32,8 +41,8 @@ const Index = () => {
         return <StarfieldScreensaver {...props} />;
       case "dvd":
         return <DvdScreensaver {...props} />;
-      // Additional screensavers will be implemented in future updates
       default:
+        // For unimplemented screensavers, show bubbles as fallback
         return <BubblesScreensaver {...props} />;
     }
   };
