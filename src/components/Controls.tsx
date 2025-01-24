@@ -23,13 +23,40 @@ const Controls: React.FC<Props> = ({
   size,
   setSize,
 }) => {
-  const screensavers = ["bubbles", "matrix", "starfield", "dvd"];
-  const colors = ["#ffffff", "#00ff00", "#ff0000", "#00ffff", "#ffff00"];
+  const screensavers = [
+    "bubbles",
+    "matrix",
+    "starfield",
+    "dvd",
+    "waves",
+    "particles",
+    "plasma",
+    "geometric",
+    "rain",
+    "fire",
+    "tunnel",
+    "spiral",
+    "noise",
+    "grid",
+  ];
+  
+  const colors = [
+    "#ffffff",
+    "#00ff00",
+    "#ff0000",
+    "#00ffff",
+    "#ffff00",
+    "#ff00ff",
+    "#8B5CF6",
+    "#D946EF",
+    "#F97316",
+    "#0EA5E9",
+  ];
 
   return (
     <div className="controls-overlay">
       <div className="control-panel glass">
-        <div className="flex gap-2">
+        <div className="flex gap-2 flex-wrap justify-center">
           {screensavers.map((screensaver) => (
             <Button
               key={screensaver}
@@ -42,8 +69,8 @@ const Controls: React.FC<Props> = ({
           ))}
         </div>
 
-        <div className="flex items-center gap-4">
-          <div className="flex gap-2">
+        <div className="flex items-center gap-4 flex-wrap justify-center">
+          <div className="flex gap-2 flex-wrap justify-center">
             {colors.map((c) => (
               <button
                 key={c}
@@ -56,7 +83,7 @@ const Controls: React.FC<Props> = ({
             ))}
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap">
             <div className="flex flex-col gap-1">
               <span className="text-sm">Speed</span>
               <Slider
